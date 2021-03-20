@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import RenderRoutes from "./navigation/RenderRoutes";
+import firebase from "firebase/app";
+import {config} from "./firebaseConfig"
+
+firebase.initializeApp(config);
+
+
 
 ReactDOM.render(<RenderRoutes />, document.getElementById("root"));
 
