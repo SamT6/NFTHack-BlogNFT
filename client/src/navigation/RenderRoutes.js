@@ -4,13 +4,9 @@ import Header from "../components/Header";
 import Creator from "../screens/Creator";
 import Form from "../screens/Form";
 import Main from "../screens/Main";
-<<<<<<< HEAD
 import Shard from "../screens/Shard";
-import Sell from "../screens/Sell";
 import Contact from "../screens/Contact";
-=======
 import Sell from "../screens/Sell";
->>>>>>> db59a58796f0b357cb31986296ec37c45b829d96
 
 export default class RenderRoutes extends Component {
   render() {
@@ -37,7 +33,6 @@ export default class RenderRoutes extends Component {
             // Andrew
             <Route path="/" exact={true} render={() => <Main />} />
             <Route path="/sell" exact={true} render={() => <Sell />} />
-
             <Route path="/creator" exact={false} render={() => <Creator />} />
             <Route path="/shards" exact={false} render={() => <Shard />} />
             // Dwarkesh + Sam

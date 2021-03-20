@@ -107,7 +107,7 @@ export default class Main extends Component {
               fontSize: 20,
               fontFamily: "spec-bold",
               color: secondaryColor,
-              marginTop: 2,
+              marginTop: 0,
             }}
           >
             {blog}
