@@ -102,7 +102,7 @@ export default class Header extends Component {
                 color: "#283142",
               }}
             >
-              Work with us
+              Sell
             </div>
           </Link>
 
