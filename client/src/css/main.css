@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "test";
+  src: local("test"), url(../fonts/test.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "tinos";
+  src: local("tinos"), url(../fonts/tinos.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "tinos-bold";
+  src: local("tinos-bold"), url(../fonts/tinos-bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "tinos-bold-italic";
+  src: local("tinos-bold-italic"),
+    url(../fonts/tinos-bold-italic.ttf) format("truetype");
+}
+
+.box-elem:hover {
+  opacity: 0.8;
+  transition-duration: 400ms;
+}
