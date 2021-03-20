@@ -103,11 +103,14 @@ const App = () => {
   }
 
   const buyNFT = async () => {
-    
+    const tokenPrice = await marketplaceContract.methods.executeTrade(buyTradeID).call()
+
     const tx = await marketplaceContract.methods.executeTrade(buyTradeID,).send({
       from: ethAccount
     })
   }
+
+  
 
   return(
     <div className="main">
