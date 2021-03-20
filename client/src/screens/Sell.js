@@ -1,39 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Web3 from "web3";
-import { MetaMaskButton } from 'rimble-ui';
-import * as blogNFT from '../contracts/BlogNFT.json'
-import * as marketplace from '../contracts/Marketplace.json'
+import { MetaMaskButton } from "rimble-ui";
+import * as blogNFT from "../contracts/BlogNFT.json";
+import * as marketplace from "../contracts/Marketplace.json";
 import {
   FirebaseAuthProvider,
   FirebaseAuthConsumer,
   IfFirebaseAuthed,
-  IfFirebaseAuthedAnd
+  IfFirebaseAuthedAnd,
 } from "@react-firebase/auth";
-import { NFTStorage, Blob } from 'nft.storage'
-
-
+import { NFTStorage, Blob } from "nft.storage";
+import firebase from "firebase/app";
+import "firebase/auth";
+import { Link } from "react-router-dom";
 
 const axios = require("axios");
 const FormData = require("form-data");
 
-
-
-const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnaXRodWJ8NDU1MTc5MTEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYxNjE4ODM4OTgxMiwibmFtZSI6ImRlZmF1bHQifQ.ugTHkSIEBhS9Olsikjh_vuX2nB8x-R8t_ghAv4rYm5g';
-const client = new NFTStorage({ token: apiKey })
-
-
-
+const apiKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnaXRodWJ8NDU1MTc5MTEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYxNjE4ODM4OTgxMiwibmFtZSI6ImRlZmF1bHQifQ.ugTHkSIEBhS9Olsikjh_vuX2nB8x-R8t_ghAv4rYm5g";
+const client = new NFTStorage({ token: apiKey });
 
 const web3 = new Web3(Web3.givenProvider);
 
-const blogNFT_address = "0x7733e0C4359863a4253A202cB405D3b0fBd95B17"
+const blogNFT_address = "0x7733e0C4359863a4253A202cB405D3b0fBd95B17";
 const blogNFTContract = new web3.eth.Contract(blogNFT.abi, blogNFT_address);
 
-const marketplace_address = "0x91e28C4368A18e612F8D2ecA54BF4005d5889Ef2"
-const marketplaceContract = new web3.eth.Contract(marketplace.abi, marketplace_address);
-
+const marketplace_address = "0x91e28C4368A18e612F8D2ecA54BF4005d5889Ef2";
+const marketplaceContract = new web3.eth.Contract(
+  marketplace.abi,
+  marketplace_address
+);
 
 export default function Sell() {
+  return (
+    <div>
+      <SignIn />
+    </div>
+  );
+}
+
+function MintNFT() {
   const [ethAccount, setEthAccount] = useState("");
   const [metadata, setMetadata] = useState("");
 
@@ -43,38 +50,39 @@ export default function Sell() {
   const [title, setTitle] = useState("");
   const [timestamp, setTimestamp] = useState(0);
 
-
   const connect_metamask = async () => {
     const accounts = await window.ethereum.enable();
     setEthAccount(accounts[0]);
-  }
+  };
 
   const mint_nft = async (t) => {
-    t.preventDefault()
+    t.preventDefault();
 
-    setTimestamp(Date.now())
+    setTimestamp(Date.now());
 
     await uploadToIPFS();
 
-    const tx = await blogNFTContract.methods.awardItem(ethAccount, ipfsHash, metadata).send({
-      from: ethAccount
-    })
-
-  }
+    const tx = await blogNFTContract.methods
+      .awardItem(ethAccount, ipfsHash, metadata)
+      .send({
+        from: ethAccount,
+      });
+  };
 
   const get_nft = async (t) => {
-    t.preventDefault()
-    console.log('getting nft');
+    t.preventDefault();
+    console.log("getting nft");
 
     const numOfNFT = await blogNFTContract.methods.balanceOf(ethAccount).call();
     console.log("number of nft: ", numOfNFT);
 
     for (var i = 0; i < parseInt(numOfNFT); i++) {
-      const tokenID = await blogNFTContract.methods.tokenOfOwnerByIndex(ethAccount, i).call();
+      const tokenID = await blogNFTContract.methods
+        .tokenOfOwnerByIndex(ethAccount, i)
+        .call();
       console.log(tokenID);
     }
-
-  }
+  };
 
   const uploadToIPFS = async () => {
     const content = new Blob([author, title, url, timestamp]);
@@ -84,14 +92,15 @@ export default function Sell() {
     setIPFSHash(cid);
     setMetadata("ipfs://" + cid);
     setIPFSHash(0);
-};
+  };
 
-  return(
+  return (
     <div className="main">
       <div className="card">
-          <h1>We're excited to help you sell NFT's of your blog posts!</h1>
-          {/* <p>address: {ethAccount}</p> */}
-          {/* <MetaMaskButton onClick={connect_metamask}>Connect with MetaMask</MetaMaskButton>  */}
+        <h1>We're excited to help you sell NFT's of your blog posts!</h1>
+        <button>Sign in</button>
+        {/* <p>address: {ethAccount}</p> */}
+        {/* <MetaMaskButton onClick={connect_metamask}>Connect with MetaMask</MetaMaskButton>  */}
       </div>
       <div className="card">
         <form className="form" onSubmit={mint_nft}>
@@ -99,29 +108,113 @@ export default function Sell() {
           {/* <label for="hash">IPFS Hash:</label> */}
           {/* <input type="text" id="hash" onChange={(t)=>{setIPFSHash(t.target.value)}}/> */}
           <label for="author">Name of Author:</label>
-          <input type="text" id="author" onChange={(t)=>{setAuthor(t.target.value)}}/>
-          <br/>
+          <input
+            type="text"
+            id="author"
+            onChange={(t) => {
+              setAuthor(t.target.value);
+            }}
+          />
+          <br />
 
           <label for="title">Title:</label>
-          <input type="text" id="title" onChange={(t)=>{setTitle(t.target.value)}}/>
-          <br/>
+          <input
+            type="text"
+            id="title"
+            onChange={(t) => {
+              setTitle(t.target.value);
+            }}
+          />
+          <br />
 
           <label for="url">URL:</label>
-          <input type="text" id="url" onChange={(t)=>{setUrl(t.target.value)}}/>
-          <br/>
+          <input
+            type="text"
+            id="url"
+            onChange={(t) => {
+              setUrl(t.target.value);
+            }}
+          />
+          <br />
 
           <label for="amount">Metadata URI:</label>
-          <input type="text" id="amount" onChange={(t)=>{setMetadata(t.target.value)}}/>
-          <br/>
+          <input
+            type="text"
+            id="amount"
+            onChange={(t) => {
+              setMetadata(t.target.value);
+            }}
+          />
+          <br />
           <button className="button">submit</button>
         </form>
-      </div> 
+      </div>
       <div className="card">
-        <br/>
+        <br />
         <button onClick={get_nft}>See Your NFT</button>
-      </div> 
+      </div>
     </div>
   );
-
 }
 
+const SignIn = () => {
+  const [email, setEmail] = useState("");
+
+  const submit = async () => {
+    const actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be in the authorized domains list in the Firebase Console.
+      url: "https://www.example.com/finishSignUp?cartId=1234",
+      // This must be true.
+      handleCodeInApp: true,
+      iOS: {
+        bundleId: "com.example.ios",
+      },
+      android: {
+        packageName: "com.example.android",
+        installApp: true,
+        minimumVersion: "12",
+      },
+      dynamicLinkDomain: "example.page.link",
+    };
+
+    firebase
+      .auth()
+      .sendSignInLinkToEmail(email, actionCodeSettings)
+      .then(() => {
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        window.localStorage.setItem("emailForSignIn", email);
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+  };
+
+  return (
+    <div className="mt-8">
+      <h1 className="text-3xl mb-2 text-center font-bold">
+        Sign Up/ Sign In with an email link
+      </h1>
+      <form className="">
+        <label htmlFor="userEmail" className="block">
+          Email:
+        </label>
+        <input
+          type="email"
+          className="my-1 p-1 w-full"
+          name="userEmail"
+          value={email}
+          placeholder="E.g: faruq123@gmail.com"
+          id="userEmail"
+          onChange={(event) => setEmail(event.target.value)}
+        />
+      </form>
+      <button>Submit</button>
+    </div>
+  );
+};
