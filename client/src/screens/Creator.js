@@ -164,22 +164,52 @@ export default class Creator extends Component {
     return (
       <div
         style={{
-          marginLeft: 10,
-          marginRight: 10,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <img src={MR} style={{ width: 150, height: 150, borderRadius: 10 }} />
-        <div style={{ fontFamily: "tinos", fontSize: 18, marginTop: 10 }}>
-          {item.title}
+        <div
+          style={{
+            marginLeft: 10,
+            marginRight: 10,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+            cursor: "pointer",
+            height: 320,
+            backgroundColor: "#16b78f",
+            width: 230,
+            borderRadius: 5,
+          }}
+        >
+          <img src={MR} style={{ width: 150, height: 150, borderRadius: 10 }} />
+
+          <div
+            style={{
+              backgroundColor: "#f1f1f1",
+              marginBottom: 5,
+              borderRadius: 5,
+              width: 220,
+              height: 200,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{ fontFamily: "tinos-bold", fontSize: 18, marginTop: 10 }}
+            >
+              {item.title}
+            </div>
+            <div style={{ fontFamily: "tinos", fontSize: 18, marginTop: 5 }}>
+              {item.date}
+            </div>
+          </div>
         </div>
-        <div style={{ fontFamily: "tinos", fontSize: 18, marginTop: 5 }}>
-          {item.title}
-        </div>
-        <div style={{ fontFamily: "tinos", fontSize: 18, marginTop: 5 }}>
-          {item.title}
+        <div style={{ fontFamily: "tinos-bold", fontSize: 24, marginTop: 10 }}>
+          {"$" + item.price}
         </div>
       </div>
     );
