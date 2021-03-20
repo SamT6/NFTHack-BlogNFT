@@ -53,7 +53,7 @@ contract Marketplace {
         //emit TradeStatusChange(_trade, "Cancelled");
     }
 
-    function getPrice(uint256 _trade) public return(uint256) {
+    function getPrice(uint256 _trade) public returns (uint256) {
         return trades[_trade].price;
     }
 

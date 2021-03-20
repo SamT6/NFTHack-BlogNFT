@@ -105,12 +105,24 @@ const App = () => {
   const buyNFT = async () => {
     const tokenPrice = await marketplaceContract.methods.executeTrade(buyTradeID).call()
 
-    const tx = await marketplaceContract.methods.executeTrade(buyTradeID,).send({
+    const tx = await marketplaceContract.methods.executeTrade(buyTradeID).send({
       from: ethAccount
     })
   }
 
-  
+  const addOwner = async () => {
+    const tx = await blogNFTContract.methods.addOwner("new_owner_address").send({
+      from: ethAccount
+    })
+  }
+
+  const addCreator = async () => {
+    const tx = await blogNFTContract.methods.addCreator("new_creator_address").send({
+      from: ethAccount
+    })
+  }
+
+
 
   return(
     <div className="main">
