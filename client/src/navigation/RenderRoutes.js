@@ -5,6 +5,15 @@ import Creator from "../screens/Creator";
 import Form from "../screens/Form";
 import Main from "../screens/Main";
 import Sell from "../screens/Sell";
+import { config } from "../firebaseConfig"
+import firebase from "firebase/app";
+import "firebase/auth";
+import {
+  FirebaseAuthProvider,
+  FirebaseAuthConsumer,
+  IfFirebaseAuthed,
+  IfFirebaseAuthedAnd
+} from "@react-firebase/auth";
 
 export default class RenderRoutes extends Component {
   render() {
@@ -24,19 +33,23 @@ export default class RenderRoutes extends Component {
           minHeight: "100vh",
         }}
       >
-        <Router>
-          <Header />
-          <div style={{ height: 80 }}></div>
-          <Switch>
-            // Andrew
-            <Route path="/" exact={true} render={() => <Main />} />
-            <Route path="/sell" exact={true} render={() => <Sell />} />
+        <FirebaseAuthProvider firebase={firebase} {...config}>
 
-            <Route path="/creator" exact={false} render={() => <Creator />} />
+          <Router>
+            <Header />
+            <div style={{ height: 80 }}></div>
+            <Switch>
+              // Andrew
+            <Route path="/" exact={true} render={() => <Main />} />
+              <Route path="/sell" exact={true} render={() => <Sell />} />
+
+              <Route path="/creator" exact={false} render={() => <Creator />} />
             // Dwarkesh + Sam
             <Route path="/pathtoform" exact={false} render={() => <Form />} />
-          </Switch>
-        </Router>
+            </Switch>
+          </Router>
+        </FirebaseAuthProvider>
+
       </div>
     );
   }
