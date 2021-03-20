@@ -79,7 +79,7 @@ export default class Header extends Component {
         </Link>
         <div style={{ display: "flex" }}>
           <Link
-            to="/creators"
+            to="/sell"
             id="header-link"
             style={{
               display: "flex",
@@ -95,7 +95,7 @@ export default class Header extends Component {
           >
             <div
               style={{
-                fontFamily: "tinos-bold",
+                fontFamily: "spec-bold",
                 textAlign: "center",
                 fontSize: 18,
                 cursor: "pointer",
@@ -123,7 +123,7 @@ export default class Header extends Component {
           >
             <div
               style={{
-                fontFamily: "tinos-bold",
+                fontFamily: "spec-bold",
                 textAlign: "center",
                 fontSize: 18,
                 cursor: "pointer",

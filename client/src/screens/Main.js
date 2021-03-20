@@ -16,7 +16,7 @@ export default class Main extends Component {
       >
         <div
           style={{
-            fontFamily: "tinos-bold-italic",
+            fontFamily: "spec-bold-italic",
             fontSize: 36,
             marginTop: 40,
           }}
@@ -25,7 +25,7 @@ export default class Main extends Component {
         </div>
         <div
           style={{
-            fontFamily: "tinos",
+            fontFamily: "spec",
             width: 500,
             textAlign: "center",
             fontSize: 22,
@@ -96,7 +96,7 @@ export default class Main extends Component {
           <div
             style={{
               fontSize: 28,
-              fontFamily: "tinos-bold",
+              fontFamily: "spec-bold",
               color: secondaryColor,
             }}
           >
@@ -105,9 +105,9 @@ export default class Main extends Component {
           <div
             style={{
               fontSize: 20,
-              fontFamily: "tinos-bold",
+              fontFamily: "spec-bold",
               color: secondaryColor,
-              marginTop: 5,
+              marginTop: 2,
             }}
           >
             {blog}
@@ -115,7 +115,7 @@ export default class Main extends Component {
           <div
             style={{
               fontSize: 20,
-              fontFamily: "tinos-bold",
+              fontFamily: "spec-bold",
               color: secondaryColor,
               marginTop: 15,
             }}
