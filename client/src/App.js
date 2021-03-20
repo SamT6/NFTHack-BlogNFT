@@ -11,10 +11,8 @@ const axios = require("axios");
 const FormData = require("form-data");
 
 
-
 const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnaXRodWJ8NDU1MTc5MTEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYxNjE4ODM4OTgxMiwibmFtZSI6ImRlZmF1bHQifQ.ugTHkSIEBhS9Olsikjh_vuX2nB8x-R8t_ghAv4rYm5g';
 const client = new NFTStorage({ token: apiKey })
-
 
 
 const web3 = new Web3(Web3.givenProvider);
@@ -35,6 +33,13 @@ const App = () => {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [timestamp, setTimestamp] = useState(0);
+
+  const [sellTokenID, setSellTokenID] = useState(0);
+  const [sellPrice, setSellPrice] = useState(0);
+
+  const [tradeID, setTradeID] = useState(0);
+
+  const [buyTradeID, setBuyTradeID] = useState(0);
 
 
 
@@ -67,7 +72,6 @@ const App = () => {
       const tokenID = await blogNFTContract.methods.tokenOfOwnerByIndex(ethAccount, i).call();
       console.log(tokenID);
     }    
-
   }
 
   const uploadToIPFS = async () => {
@@ -78,7 +82,32 @@ const App = () => {
     setIPFSHash(cid);
     setMetadata("ipfs://" + cid);
     setIPFSHash(0);
-};
+  }
+
+  const sellNFT = async () => {
+    //give permission to moove token to contract
+    const tx = await blogNFTContract.methods.approve(marketplace_address, sellTokenID).send({
+      from: ethAccount
+    })
+
+    //call opentrade on marketplace.sol
+    const tx = await marketplaceContract.methods.openTrade(sellTokenID, sellPrice).send({
+      from: ethAccount
+    })
+  }
+
+  const cancelSellNFT = async () => {
+    const tx = await marketplaceContract.methods.cancelTrade(tradeID).send({
+      from: ethAccount
+    })
+  }
+
+  const buyNFT = async () => {
+    
+    const tx = await marketplaceContract.methods.executeTrade(buyTradeID,).send({
+      from: ethAccount
+    })
+  }
 
   return(
     <div className="main">

@@ -79,7 +79,7 @@ export default class Header extends Component {
         </Link>
         <div style={{ display: "flex" }}>
           <Link
-            to="/creators"
+            to="/sell"
             id="header-link"
             style={{
               display: "flex",
@@ -102,7 +102,7 @@ export default class Header extends Component {
                 color: "#283142",
               }}
             >
-              Work with us
+              Sell
             </div>
           </Link>
 

@@ -14,18 +14,12 @@ contract Marketplace {
     IERC721 public itemToken;
     uint256 public tradeCounter;
 
-    constructor (
-	    //address _currencyTokenAddress, 
-        address _itemTokenAddress
-	) public {
-	  //currencyToken = IERC20(_currencyTokenAddress);
+    constructor (address _itemTokenAddress) public {
 	  itemToken = BlogNFT(_itemTokenAddress);
 	  tradeCounter = 0;
 	}
 
-    function openTrade(uint256 _item, uint256 _price)
-    public
-    {
+    function openTrade(uint256 _item, uint256 _price) public{
         itemToken.transferFrom(msg.sender, address(this), _item);
         trades[tradeCounter] = Trade({
             poster: msg.sender,
@@ -37,22 +31,17 @@ contract Marketplace {
         //emit TradeStatusChange(tradeCounter - 1, "Open");
     }
 
-    function executeTrade(uint256 _trade)
-    public payable
-    {
+    function executeTrade(uint256 _trade) public payable{
         Trade memory trade = trades[_trade];
         require(trade.status == "Open", "Trade is not Open.");
         require(msg.value == trade.price, "not enough eth");
         trade.poster.transfer(trade.price);
-        //currencyToken.transferFrom(msg.sender, trade.poster, trade.price);
         itemToken.transferFrom(address(this), msg.sender, trade.item);
         trades[_trade].status = "Executed";
        // emit TradeStatusChange(_trade, "Executed");
     }
 
-    function cancelTrade(uint256 _trade)
-    public
-    {
+    function cancelTrade(uint256 _trade) public{
         Trade memory trade = trades[_trade];
         require(
             msg.sender == trade.poster,
@@ -64,5 +53,8 @@ contract Marketplace {
         //emit TradeStatusChange(_trade, "Cancelled");
     }
 
+    function getPrice(uint256 _trade) public return(uint256) {
+        return trades[_trade].price;
+    }
 
 }
