@@ -4,6 +4,9 @@ import { MetaMaskButton } from "rimble-ui";
 import * as blogNFT from "../../contracts/BlogNFT.json";
 import * as marketplace from "../../contracts/Marketplace.json";
 import { NFTStorage, Blob } from "nft.storage";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 
 const axios = require("axios");
 const FormData = require("form-data");
@@ -50,6 +53,13 @@ export default function MintNFT() {
       .send({
         from: ethAccount,
       });
+
+    const name = firebase.auth().currentUser.displayName;
+    firebase
+      .firestore()
+      .collection("sellers")
+      .doc(name)
+      .update({ NFTs: firebase.firestore.FieldValue.arrayUnion(ipfsHash) });
   };
 
   const get_nft = async (t) => {
@@ -88,7 +98,7 @@ export default function MintNFT() {
       </div>
       <div className="card">
         <form className="form" onSubmit={mint_nft}>
-          <h3>Mint NFT</h3>
+          <h3>Blog Post information</h3>
           {/* <label for="hash">IPFS Hash:</label> */}
           {/* <input type="text" id="hash" onChange={(t)=>{setIPFSHash(t.target.value)}}/> */}
           <label for="author">Name of Author:</label>
@@ -121,14 +131,14 @@ export default function MintNFT() {
           />
           <br />
 
-          <label for="amount">Metadata URI:</label>
+          {/* <label for="amount">Metadata URI:</label>
           <input
             type="text"
             id="amount"
             onChange={(t) => {
               setMetadata(t.target.value);
             }}
-          />
+          /> */}
           <br />
           <button className="button">submit</button>
         </form>

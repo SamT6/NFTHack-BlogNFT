@@ -7,6 +7,8 @@ import {
 } from "@react-firebase/auth";
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
+
 import { Link } from "react-router-dom";
 
 export default function SignIn() {
@@ -26,6 +28,11 @@ export default function SignIn() {
       user.sendEmailVerification();
       user.updateProfile({
         displayName: name,
+      });
+      firebase.firestore().collection("sellers").doc(name).set({
+        name: name,
+        email: email,
+        NFTs: [],
       });
     } else {
       firebase
