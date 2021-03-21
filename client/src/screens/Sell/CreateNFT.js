@@ -4,6 +4,9 @@ import { MetaMaskButton } from "rimble-ui";
 import * as blogNFT from "../../contracts/BlogNFT.json";
 import * as marketplace from "../../contracts/Marketplace.json";
 import { NFTStorage, Blob } from "nft.storage";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 
 const axios = require("axios");
 const FormData = require("form-data");
@@ -33,6 +36,11 @@ export default function MintNFT() {
   const [title, setTitle] = useState("");
   const [timestamp, setTimestamp] = useState(0);
 
+  const [sellTokenID, setSellTokenID] = useState(0);
+  const [sellPrice, setSellPrice] = useState(0);
+
+  const [nftOwnByEthAccount, setNFTOwnByEthAccount] = useState({});
+
   const connect_metamask = async () => {
     const accounts = await window.ethereum.enable();
     setEthAccount(accounts[0]);
@@ -50,6 +58,13 @@ export default function MintNFT() {
       .send({
         from: ethAccount,
       });
+
+    const name = firebase.auth().currentUser.displayName;
+    firebase
+      .firestore()
+      .collection("sellers")
+      .doc(name)
+      .update({ NFTs: firebase.firestore.FieldValue.arrayUnion(ipfsHash) });
   };
 
   const get_nft = async (t) => {
@@ -59,11 +74,24 @@ export default function MintNFT() {
     const numOfNFT = await blogNFTContract.methods.balanceOf(ethAccount).call();
     console.log("number of nft: ", numOfNFT);
 
+    let nfts = {};
     for (var i = 0; i < parseInt(numOfNFT); i++) {
       const tokenID = await blogNFTContract.methods
         .tokenOfOwnerByIndex(ethAccount, i)
         .call();
       console.log(tokenID);
+      //get blog title with tokenID
+      const tokenURI = await blogNFTContract.methods.tokenURI(tokenID).call(); // metadata, IPFS link
+      axios
+        .get("https://nft.storage/api/" + tokenURI)
+        .then(function (response) {
+          console.log(response);
+        });
+
+      //add {tokenid, blog title} to nfts
+      //nfts[tokenID] = blogTitle;
+      //setState of nftOwnByEthAccount
+      setNFTOwnByEthAccount(nfts);
     }
   };
 
@@ -77,6 +105,22 @@ export default function MintNFT() {
     setIPFSHash(0);
   };
 
+  const sellNFT = async () => {
+    //give permission to move token to contract
+    const tx = await blogNFTContract.methods
+      .approve(marketplace_address, sellTokenID)
+      .send({
+        from: ethAccount,
+      });
+
+    //call opentrade on marketplace.sol
+    tx = await marketplaceContract.methods
+      .openTrade(sellTokenID, sellPrice)
+      .send({
+        from: ethAccount,
+      });
+  };
+
   return (
     <div className="main">
       <div className="card">
@@ -88,7 +132,7 @@ export default function MintNFT() {
       </div>
       <div className="card">
         <form className="form" onSubmit={mint_nft}>
-          <h3>Mint NFT</h3>
+          <h3>Blog Post information</h3>
           {/* <label for="hash">IPFS Hash:</label> */}
           {/* <input type="text" id="hash" onChange={(t)=>{setIPFSHash(t.target.value)}}/> */}
           <label for="author">Name of Author:</label>
@@ -121,22 +165,50 @@ export default function MintNFT() {
           />
           <br />
 
-          <label for="amount">Metadata URI:</label>
+          {/* <label for="amount">Metadata URI:</label>
           <input
             type="text"
             id="amount"
             onChange={(t) => {
               setMetadata(t.target.value);
             }}
-          />
+          /> */}
           <br />
           <button className="button">submit</button>
         </form>
       </div>
+
       <div className="card">
+        <form className="form" onSubmit={sellNFT}>
+          <h3>Sell Blog NFT</h3>
+
+          <label for="tokenid">TokenID:</label>
+          <input
+            type="text"
+            id="tokenid"
+            onChange={(t) => {
+              setSellTokenID(t.target.value);
+            }}
+          />
+          <br />
+
+          <label for="price">Price:</label>
+          <input
+            type="text"
+            id="price"
+            onChange={(t) => {
+              setSellPrice(t.target.value);
+            }}
+          />
+          <br />
+
+          <button className="button">submit</button>
+        </form>
+      </div>
+      {/* <div className="card">
         <br />
         <button onClick={get_nft}>See Your NFT</button>
-      </div>
+      </div> */}
     </div>
   );
 }

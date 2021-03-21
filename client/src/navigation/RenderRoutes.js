@@ -6,7 +6,7 @@ import Form from "../screens/Form";
 import Main from "../screens/Main";
 import Shard from "../screens/Shard";
 import Contact from "../screens/Contact";
-import Sell from "../screens/Sell";
+import Sell from "../screens/Sell/Sell";
 import { config } from "../firebaseConfig";
 import firebase from "firebase/app";
 import "firebase/auth";
