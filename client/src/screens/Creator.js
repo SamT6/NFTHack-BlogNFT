@@ -4,6 +4,8 @@ import MR from "../images/MR.png";
 import "../css/main.css";
 import downArrow from "../images/down-arrow.png";
 import upArrow from "../images/up-arrow.png";
+import bryan from "../images/bryan.jpeg";
+
 import { Input, Menu, MenuItem } from "@material-ui/core";
 
 export default class Creator extends Component {
@@ -29,6 +31,7 @@ export default class Creator extends Component {
       ],
       menuOpen: null,
       sortType: "Available",
+      search: "",
     };
   }
 
@@ -49,7 +52,7 @@ export default class Creator extends Component {
         >
           <div style={{ marginTop: "5vh" }}>
             <img
-              src={tyler}
+              src={bryan}
               style={{ width: 300, height: 300, borderRadius: 130 }}
             />
             <div
@@ -60,7 +63,7 @@ export default class Creator extends Component {
                 color: "#283142",
               }}
             >
-              Tyler Cowen
+              Andrew Young
             </div>
             <div
               style={{
@@ -96,6 +99,9 @@ export default class Creator extends Component {
           </div>
           <div style={{ marginLeft: 80, marginTop: "5vh" }}>
             <Input
+              onChangeCapture={(text) =>
+                this.setState({ search: text.target.value })
+              }
               style={{ width: "30vw", fontSize: 20, fontFamily: "spec" }}
               placeholder={"Find a post"}
             />
@@ -153,6 +159,17 @@ export default class Creator extends Component {
         </div>
         <div style={{ display: "flex" }}>
           {blogPosts.map((item, index) => {
+            const { search } = this.state;
+
+            if (search !== "") {
+              if (
+                !item.title
+                  .toLocaleLowerCase()
+                  .includes(search.toLocaleLowerCase())
+              ) {
+                return null;
+              }
+            }
             return this.ItemComp(item, index);
           })}
         </div>

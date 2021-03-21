@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MR from "../images/MR.png";
+import { injected } from "../components/Connectors";
 
 export default class Shard extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ export default class Shard extends Component {
         >
           <div>{this.ItemComp(shardInfo)}</div>
           <div
-            onClick={() => alert("Dwarkesh - handle this.")}
+            onClick={() => this.buyNFT()}
             style={{
               width: 150,
               cursor: "pointer",
@@ -112,5 +113,12 @@ export default class Shard extends Component {
         </div>
       </div>
     );
+  }
+
+  buyNFT() {
+    if (!injected.isAuthorized()) {
+      injected.activate();
+    }
+    alert("Good to buy!");
   }
 }

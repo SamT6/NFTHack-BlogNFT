@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import scroll from "../images/scroll.png";
 import { isMobile } from "react-device-detect";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { createMetaMaskContext } from "@daisypayments/react-metamask";
 import "../css/main.css";
+import MetaMaskButton from "./MetaMaskButton";
+import { injected } from "./Connectors";
 
 export default class Header extends Component {
   render() {
@@ -106,6 +109,23 @@ export default class Header extends Component {
             </div>
           </Link>
 
+          {!injected.isAuthorized() && (
+            <div
+              style={{
+                fontFamily: "spec-bold",
+                textAlign: "center",
+                fontSize: 18,
+                marginLeft: isMobile ? "2vw" : "0vw",
+                cursor: "pointer",
+                color: "#283142",
+                marginRight: 25,
+              }}
+              onClick={() => this.activeMetaMask()}
+            >
+              MetaMask
+            </div>
+          )}
+
           <Link
             to="/contact"
             id="header-link"
@@ -136,5 +156,16 @@ export default class Header extends Component {
         </div>
       </div>
     );
+  }
+
+  activeMetaMask() {
+    injected
+      .activate()
+      .then((a) => {
+        console.log(a);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 }

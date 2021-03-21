@@ -16,7 +16,7 @@ export default class Main extends Component {
       >
         <div
           style={{
-            fontFamily: "spec-bold-italic",
+            fontFamily: "spec-bold",
             fontSize: 36,
             marginTop: 40,
           }}
@@ -36,7 +36,7 @@ export default class Main extends Component {
           Scholars, academics, and writers release unique NFT's of their work
           that can only be found here.
         </div>
-        {this.WriterBox(
+        {/* {this.WriterBox(
           "Tyler Cowen",
           tyler,
           "Marginal Revolution",
@@ -46,16 +46,16 @@ export default class Main extends Component {
           23,
           25,
           "123"
-        )}
+        )}*/}
         {this.WriterBox(
-          "Bryan Caplan",
+          "Andrew Young",
           bryan,
-          "Econ Lib",
+          "Scholaristic Divinations",
           // "#003866",
-          this.blendColors("#003866", "#ffffff", 0.2),
-          this.blendColors("#ffffff", "#ffffff", 0.2),
-          5,
-          32,
+          this.blendColors("#16b78f", "#ffffff", 0.2),
+          this.blendColors("#000000", "#ffffff", 0.2),
+          0,
+          23,
           "123"
         )}
       </div>
