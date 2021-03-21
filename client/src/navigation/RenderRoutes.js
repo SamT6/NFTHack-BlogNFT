@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import Creator from "../screens/Creator";
 import Form from "../screens/Form";
 import Main from "../screens/Main";
+import Shard from "../screens/Shard";
+import Contact from "../screens/Contact";
 import Sell from "../screens/Sell";
 
 export default class RenderRoutes extends Component {
@@ -31,10 +33,11 @@ export default class RenderRoutes extends Component {
             // Andrew
             <Route path="/" exact={true} render={() => <Main />} />
             <Route path="/sell" exact={true} render={() => <Sell />} />
-
             <Route path="/creator" exact={false} render={() => <Creator />} />
+            <Route path="/shards" exact={false} render={() => <Shard />} />
             // Dwarkesh + Sam
-            <Route path="/pathtoform" exact={false} render={() => <Form />} />
+            <Route path="/sell" exact={false} render={() => <Sell />} />
+            <Route path="/contact" exact={false} render={() => <Contact />} />
           </Switch>
         </Router>
       </div>

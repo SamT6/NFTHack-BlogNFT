@@ -54,7 +54,7 @@ export default class Creator extends Component {
             />
             <div
               style={{
-                fontFamily: "tinos-bold",
+                fontFamily: "spec-bold",
                 textAlign: "center",
                 fontSize: 38,
                 color: "#283142",
@@ -71,7 +71,7 @@ export default class Creator extends Component {
             >
               <div
                 style={{
-                  fontFamily: "tinos",
+                  fontFamily: "spec",
                   textAlign: "center",
                   fontSize: 20,
                   color: "#283142",
@@ -82,7 +82,7 @@ export default class Creator extends Component {
               </div>
               <div
                 style={{
-                  fontFamily: "tinos",
+                  fontFamily: "spec",
                   textAlign: "center",
                   fontSize: 20,
                   color: "#283142",
@@ -96,8 +96,8 @@ export default class Creator extends Component {
           </div>
           <div style={{ marginLeft: 80, marginTop: "5vh" }}>
             <Input
-              style={{ width: "30vw", fontSize: 20, fontFamily: "tinos" }}
-              placeholder={"Find something"}
+              style={{ width: "30vw", fontSize: 20, fontFamily: "spec" }}
+              placeholder={"Find a post"}
             />
             <div id="anchor" style={{ height: 30 }}></div>
             {/*{this.FilterBarComp()}
@@ -144,7 +144,7 @@ export default class Creator extends Component {
         <div
           style={{
             fontSize: 32,
-            fontFamily: "tinos-bold",
+            fontFamily: "spec-bold",
             marginBottom: 20,
             marginLeft: 10,
           }}
@@ -163,10 +163,12 @@ export default class Creator extends Component {
   ItemComp(item, index) {
     return (
       <div
+        onClick={() => (window.location.href = "/shards/12983")}
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          cursor: "pointer",
         }}
       >
         <div
@@ -177,7 +179,6 @@ export default class Creator extends Component {
             flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
-            cursor: "pointer",
             height: 320,
             backgroundColor: "#16b78f",
             width: 230,
@@ -192,23 +193,26 @@ export default class Creator extends Component {
               marginBottom: 5,
               borderRadius: 5,
               width: 220,
-              height: 200,
+              height: 120,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
             <div
-              style={{ fontFamily: "tinos-bold", fontSize: 18, marginTop: 10 }}
+              style={{ fontFamily: "spec-bold", fontSize: 18, marginTop: 10 }}
             >
               {item.title}
             </div>
-            <div style={{ fontFamily: "tinos", fontSize: 18, marginTop: 5 }}>
+            <div style={{ fontFamily: "spec", fontSize: 18, marginTop: 10 }}>
               {item.date}
+            </div>
+            <div style={{ fontFamily: "spec", fontSize: 18, marginTop: 2 }}>
+              {item.owner}
             </div>
           </div>
         </div>
-        <div style={{ fontFamily: "tinos-bold", fontSize: 24, marginTop: 10 }}>
+        <div style={{ fontFamily: "spec-bold", fontSize: 24, marginTop: 10 }}>
           {"$" + item.price}
         </div>
       </div>
@@ -232,7 +236,7 @@ export default class Creator extends Component {
           <div style={{ marginLeft: 20, marginTop: 2 }}>
             <div
               style={{
-                fontFamily: "tinos-bold",
+                fontFamily: "spec-bold",
                 textAlign: "center",
                 fontSize: 22,
                 color: "#283142",
@@ -240,6 +244,7 @@ export default class Creator extends Component {
             >
               {title}
             </div>
+
             <div
               style={{ fontSize: 20, fontFamily: "tinos", color: "#283142" }}
             >

@@ -19,6 +19,28 @@
     url(../fonts/tinos-bold-italic.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "tinos-bold-italic";
+  src: local("tinos-bold-italic"),
+    url(../fonts/tinos-bold-italic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "spec-bold";
+  src: local("spec-bold"), url(../fonts/spec-bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "spec";
+  src: local("spec"), url(../fonts/spec.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "spec-bold-italic";
+  src: local("spec-bold-italic"),
+    url(../fonts/spec-bold-italic.ttf) format("truetype");
+}
+
 .box-elem:hover {
   opacity: 0.8;
   transition-duration: 400ms;
