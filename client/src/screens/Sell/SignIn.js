@@ -12,15 +12,21 @@ import { Link } from "react-router-dom";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [signingUp, setSigningUp] = useState(false);
 
   const submit = async () => {
     if (signingUp) {
-      firebase
+      const userCredentials = await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .catch((error) => setError(error.message));
+      const user = userCredentials.user;
+      user.sendEmailVerification();
+      user.updateProfile({
+        displayName: name,
+      });
     } else {
       firebase
         .auth()
@@ -32,7 +38,20 @@ export default function SignIn() {
   return (
     <div className="mt-8">
       <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
-      <form className="">
+      {signingUp && (
+        <form className="name">
+          <label htmlFor="userEmail" className="block">
+            Name:
+          </label>
+          <input
+            type="name"
+            value={name}
+            id="userName"
+            onChange={(event) => setName(event.target.value)}
+          />
+        </form>
+      )}
+      <form className="email">
         <label htmlFor="userEmail" className="block">
           Email:
         </label>
@@ -44,12 +63,13 @@ export default function SignIn() {
           onChange={(event) => setEmail(event.target.value)}
         />
       </form>
-      <form className="">
+      <form className="password">
         <label htmlFor="userPass" className="block">
           Password:
         </label>
         <input
           type="password"
+          value={password}
           id="usePass"
           onChange={(event) => setPassword(event.target.value)}
         />

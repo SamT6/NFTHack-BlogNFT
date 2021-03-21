@@ -80,10 +80,11 @@ export default function MintNFT() {
   return (
     <div className="main">
       <div className="card">
-        <h1>We're excited to help you sell NFT's of your blog posts!</h1>
-        <button>Sign in</button>
-        {/* <p>address: {ethAccount}</p> */}
-        {/* <MetaMaskButton onClick={connect_metamask}>Connect with MetaMask</MetaMaskButton>  */}
+        <h1>Create NFT</h1>
+        <p>address: {ethAccount}</p>
+        <MetaMaskButton onClick={connect_metamask}>
+          Connect with MetaMask
+        </MetaMaskButton>
       </div>
       <div className="card">
         <form className="form" onSubmit={mint_nft}>
