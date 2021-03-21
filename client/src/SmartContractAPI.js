@@ -11,10 +11,10 @@ const client = new NFTStorage({ token: apiKey })
 
 const web3 = new Web3(Web3.givenProvider);
 
-const blogNFT_address = "0x7733e0C4359863a4253A202cB405D3b0fBd95B17"
+const blogNFT_address = "0x5468401B345fBEba98782E0346858d5A6E26AfC7"
 const blogNFTContract = new web3.eth.Contract(blogNFT.abi, blogNFT_address);
 
-const marketplace_address = "0x91e28C4368A18e612F8D2ecA54BF4005d5889Ef2"
+const marketplace_address = "0xbF1636FDAdB0F0a004dAb78417e8AcAa2011589a"
 const marketplaceContract = new web3.eth.Contract(marketplace.abi, marketplace_address);
 
 

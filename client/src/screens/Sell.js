@@ -90,7 +90,9 @@ export default function Sell() {
   return(
     <div >
       <div className="card">
-          <h2>We're excited to help you sell your NFTs!</h2>
+          <h3>We're excited to help you sell an NFT of your blog posts!</h3>
+          <p>Just a few things to get started</p>
+
           {/* <p>address: {ethAccount}</p>
           <MetaMaskButton onClick={connect_metamask}>Connect with MetaMask</MetaMaskButton>  */}
       </div>

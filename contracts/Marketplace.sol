@@ -6,7 +6,7 @@ contract Marketplace {
     struct Trade {
 	  address payable poster; //NFT owner
 	  uint256 item; // NFT token ID
-	  uint256 price; 
+	  uint256 price; // in wei
 	  bytes32 status; // Open, Executed, Cancelled
 	}
 
@@ -53,7 +53,7 @@ contract Marketplace {
         //emit TradeStatusChange(_trade, "Cancelled");
     }
 
-    function getPrice(uint256 _trade) public returns (uint256) {
+    function getPrice(uint256 _trade) public view returns (uint256) {
         return trades[_trade].price;
     }
 
