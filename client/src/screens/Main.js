@@ -4,6 +4,7 @@ import tyler from "../images/tyler.png";
 import SSC from "../images/ssc.png";
 import bryan from "../images/bryan.jpeg";
 
+
 export default class Main extends Component {
   render() {
     return (

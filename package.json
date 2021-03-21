@@ -1,0 +1,31 @@
+{
+  "name": "BlogNFT",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.4.1",
+    "@truffle/hdwallet-provider": "^1.2.4",
+    "dotenv": "^8.2.0",
+    "node": "^15.10.0",
+    "truffle": "^5.2.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamT6/NFTHack-BlogNFT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamT6/NFTHack-BlogNFT/issues"
+  },
+  "homepage": "https://github.com/SamT6/NFTHack-BlogNFT#readme"
+}
