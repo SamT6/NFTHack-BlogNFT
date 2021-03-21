@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.4.1",
+    "@react-firebase/auth": "^0.2.10",
     "@truffle/hdwallet-provider": "^1.2.4",
     "dotenv": "^8.2.0",
     "node": "^15.10.0",
