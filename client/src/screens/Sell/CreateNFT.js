@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import Web3 from "web3";
 import { MetaMaskButton } from "rimble-ui";
-import * as blogNFT from "../contracts/BlogNFT.json";
-import * as marketplace from "../contracts/Marketplace.json";
-import {
-  FirebaseAuthProvider,
-  FirebaseAuthConsumer,
-  IfFirebaseAuthed,
-  IfFirebaseAuthedAnd,
-} from "@react-firebase/auth";
+import * as blogNFT from "../../contracts/BlogNFT.json";
+import * as marketplace from "../../contracts/Marketplace.json";
 import { NFTStorage, Blob } from "nft.storage";
-import firebase from "firebase/app";
-import "firebase/auth";
-import { Link } from "react-router-dom";
 
 const axios = require("axios");
 const FormData = require("form-data");
@@ -32,15 +23,7 @@ const marketplaceContract = new web3.eth.Contract(
   marketplace_address
 );
 
-export default function Sell() {
-  return (
-    <div>
-      <SignIn />
-    </div>
-  );
-}
-
-function MintNFT() {
+export default function MintNFT() {
   const [ethAccount, setEthAccount] = useState("");
   const [metadata, setMetadata] = useState("");
 
@@ -156,65 +139,3 @@ function MintNFT() {
     </div>
   );
 }
-
-const SignIn = () => {
-  const [email, setEmail] = useState("");
-
-  const submit = async () => {
-    const actionCodeSettings = {
-      // URL you want to redirect back to. The domain (www.example.com) for this
-      // URL must be in the authorized domains list in the Firebase Console.
-      url: "https://www.example.com/finishSignUp?cartId=1234",
-      // This must be true.
-      handleCodeInApp: true,
-      iOS: {
-        bundleId: "com.example.ios",
-      },
-      android: {
-        packageName: "com.example.android",
-        installApp: true,
-        minimumVersion: "12",
-      },
-      dynamicLinkDomain: "example.page.link",
-    };
-
-    firebase
-      .auth()
-      .sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(() => {
-        // The link was successfully sent. Inform the user.
-        // Save the email locally so you don't need to ask the user for it again
-        // if they open the link on the same device.
-        window.localStorage.setItem("emailForSignIn", email);
-        // ...
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
-  };
-
-  return (
-    <div className="mt-8">
-      <h1 className="text-3xl mb-2 text-center font-bold">
-        Sign Up/ Sign In with an email link
-      </h1>
-      <form className="">
-        <label htmlFor="userEmail" className="block">
-          Email:
-        </label>
-        <input
-          type="email"
-          className="my-1 p-1 w-full"
-          name="userEmail"
-          value={email}
-          placeholder="E.g: faruq123@gmail.com"
-          id="userEmail"
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </form>
-      <button>Submit</button>
-    </div>
-  );
-};
