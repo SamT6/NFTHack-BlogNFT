@@ -17,10 +17,10 @@ const client = new NFTStorage({ token: apiKey });
 
 const web3 = new Web3(Web3.givenProvider);
 
-const blogNFT_address = "0x7733e0C4359863a4253A202cB405D3b0fBd95B17";
+const blogNFT_address = "0xe45e31b5cBF202cE58382D2e8D9daB4d482e5120";
 const blogNFTContract = new web3.eth.Contract(blogNFT.abi, blogNFT_address);
 
-const marketplace_address = "0x91e28C4368A18e612F8D2ecA54BF4005d5889Ef2";
+const marketplace_address = "0x1B379913DbC82ee9801F9F2C3D11dEDd6Cb1cfa9";
 const marketplaceContract = new web3.eth.Contract(
   marketplace.abi,
   marketplace_address
@@ -51,10 +51,13 @@ export default function MintNFT() {
 
     setTimestamp(Date.now());
 
-    await uploadToIPFS();
+    //await uploadToIPFS();
+    const content = new Blob([author, title, url, timestamp]);
+    const cid = await client.storeBlob(content);
+    console.log(cid);
 
     const tx = await blogNFTContract.methods
-      .awardItem(ethAccount, ipfsHash, metadata)
+      .awardItem(ethAccount, cid, "ipfs://" + cid)
       .send({
         from: ethAccount,
       });
@@ -82,8 +85,9 @@ export default function MintNFT() {
       console.log(tokenID);
       //get blog title with tokenID
       const tokenURI = await blogNFTContract.methods.tokenURI(tokenID).call(); // metadata, IPFS link
+      console.log("tokenURI: ", tokenURI.slice(7, tokenURI.length));
       axios
-        .get("https://nft.storage/api/" + tokenURI)
+        .get("https://nft.storage/api/" + tokenURI.slice(7, tokenURI.length))
         .then(function (response) {
           console.log(response);
         });
@@ -181,7 +185,8 @@ export default function MintNFT() {
       <div className="card">
         <form className="form" onSubmit={sellNFT}>
           <h3>Sell Blog NFT</h3>
-
+          <button onClick={get_nft}>see your blogs</button>
+          <br />
           <label for="tokenid">TokenID:</label>
           <input
             type="text"

@@ -25,14 +25,17 @@ export default class RenderRoutes extends Component {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          paddingLeft: "5vw",
-          paddingRight: "5vw",
+          // paddingLeft: "5vw",
+          // paddingRight: "5vw",
           //   backgroundImage:
+          width: "100vw",
+          height: "100vh",
+          margin: 0,
+          maxHeight: "100vh",
           //     "linear-gradient(0.25turn, #C5C9D2, #A8AEBB, #8B93A4)",
           backgroundImage:
             "linear-gradient(0.25turn, #FFFFFF, #D1D5DB, #A4AAB8)",
-          overflowY: "scroll",
-          minHeight: "100vh",
+          // overflowY: "scroll",
         }}
       >
         <FirebaseAuthProvider firebase={firebase} {...config}>

@@ -39,95 +39,99 @@ export default class Creator extends Component {
     const { blogTokens } = this.state;
     return (
       <div
+        className="body"
         style={{
-          width: "90vw",
-          marginTop: "0vh",
+          width: "100vw",
+          height: "100vh",
+          overflowY: "hidden",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-          }}
-        >
-          <div style={{ marginTop: "5vh" }}>
-            <img
-              src={bryan}
-              style={{ width: 300, height: 300, borderRadius: 130 }}
-            />
-            <div
-              style={{
-                fontFamily: "spec-bold",
-                textAlign: "center",
-                fontSize: 38,
-                color: "#283142",
-              }}
-            >
-              Andrew Young
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: 15,
-              }}
-            >
+        <div style={{ width: "90vw", marginLeft: "5vw", marginTop: "0vh" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            <div style={{ marginTop: "5vh" }}>
+              <img
+                src={bryan}
+                style={{ width: 300, height: 300, borderRadius: 130 }}
+              />
               <div
                 style={{
-                  fontFamily: "spec",
+                  fontFamily: "oxy-bold",
                   textAlign: "center",
-                  fontSize: 20,
+                  fontSize: 38,
                   color: "#283142",
-                  cursor: "pointer",
                 }}
               >
-                Twitter
+                Andrew Young
               </div>
               <div
                 style={{
-                  fontFamily: "spec",
-                  textAlign: "center",
-                  fontSize: 20,
-                  color: "#283142",
-                  marginLeft: 15,
-                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: 15,
                 }}
               >
-                Blog
+                <div
+                  style={{
+                    fontFamily: "oxy",
+                    textAlign: "center",
+                    fontSize: 20,
+                    color: "#283142",
+                    cursor: "pointer",
+                  }}
+                >
+                  Twitter
+                </div>
+                <div
+                  style={{
+                    fontFamily: "oxy",
+                    textAlign: "center",
+                    fontSize: 20,
+                    color: "#283142",
+                    marginLeft: 15,
+                    cursor: "pointer",
+                  }}
+                >
+                  Blog
+                </div>
               </div>
             </div>
-          </div>
-          <div style={{ marginLeft: 80, marginTop: "5vh" }}>
-            <Input
-              onChangeCapture={(text) =>
-                this.setState({ search: text.target.value })
-              }
-              style={{ width: "30vw", fontSize: 20, fontFamily: "spec" }}
-              placeholder={"Find a post"}
-            />
-            <div id="anchor" style={{ height: 30 }}></div>
-            {/*{this.FilterBarComp()}
+            <div style={{ marginLeft: 80, marginTop: "5vh" }}>
+              <Input
+                onChangeCapture={(text) =>
+                  this.setState({ search: text.target.value })
+                }
+                style={{ width: "30vw", fontSize: 20, fontFamily: "oxy" }}
+                placeholder={"Find a post"}
+              />
+              <div id="anchor" style={{ height: 30 }}></div>
+              {/*{this.FilterBarComp()}
             <div style={{ height: 10 }}></div> 
 
             {blogTokens.map((item, index) => {
               return this.SearchItemComp(item);
             })} */}
-            {this.RowComp("Blog Posts", [
-              {
-                title: "Meditations on Moloch",
-                date: "Feb 15, 2016",
-                price: "502.23",
-                available: true,
-                owner: "No owner",
-              },
-              {
-                title: "Distribute the Vaccines",
-                date: "Jan 15, 2012",
-                price: "102.23",
-                available: false,
-                owner: "@tokoloshe_",
-              },
-            ])}
+              {this.RowComp("Blog Posts", [
+                {
+                  title: "Meditations on Moloch",
+                  date: "Feb 15, 2016",
+                  price: "502.23",
+                  available: true,
+                  owner: "No owner",
+                },
+                {
+                  title: "Distribute the Vaccines",
+                  date: "Jan 15, 2012",
+                  price: "102.23",
+                  available: false,
+                  owner: "@tokoloshe_",
+                },
+              ])}
+            </div>
           </div>
         </div>
       </div>
@@ -150,7 +154,7 @@ export default class Creator extends Component {
         <div
           style={{
             fontSize: 32,
-            fontFamily: "spec-bold",
+            fontFamily: "oxy-bold",
             marginBottom: 20,
             marginLeft: 10,
           }}
@@ -217,19 +221,19 @@ export default class Creator extends Component {
             }}
           >
             <div
-              style={{ fontFamily: "spec-bold", fontSize: 18, marginTop: 10 }}
+              style={{ fontFamily: "oxy-bold", fontSize: 18, marginTop: 10 }}
             >
               {item.title}
             </div>
-            <div style={{ fontFamily: "spec", fontSize: 18, marginTop: 10 }}>
+            <div style={{ fontFamily: "oxy", fontSize: 18, marginTop: 10 }}>
               {item.date}
             </div>
-            <div style={{ fontFamily: "spec", fontSize: 18, marginTop: 2 }}>
+            <div style={{ fontFamily: "oxy", fontSize: 18, marginTop: 2 }}>
               {item.owner}
             </div>
           </div>
         </div>
-        <div style={{ fontFamily: "spec-bold", fontSize: 24, marginTop: 10 }}>
+        <div style={{ fontFamily: "oxy-bold", fontSize: 24, marginTop: 10 }}>
           {"$" + item.price}
         </div>
       </div>
@@ -253,7 +257,7 @@ export default class Creator extends Component {
           <div style={{ marginLeft: 20, marginTop: 2 }}>
             <div
               style={{
-                fontFamily: "spec-bold",
+                fontFamily: "oxy-bold",
                 textAlign: "center",
                 fontSize: 22,
                 color: "#283142",

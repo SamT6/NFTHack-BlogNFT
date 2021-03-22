@@ -44,7 +44,7 @@ export default class Shard extends Component {
               fontSize: 18,
               justifyContent: "center",
               alignItems: "center",
-              fontFamily: "spec-bold",
+              fontFamily: "oxy-bold",
             }}
           >
             Buy now
@@ -96,19 +96,19 @@ export default class Shard extends Component {
             }}
           >
             <div
-              style={{ fontFamily: "spec-bold", fontSize: 18, marginTop: 10 }}
+              style={{ fontFamily: "oxy-bold", fontSize: 18, marginTop: 10 }}
             >
               {item.title}
             </div>
-            <div style={{ fontFamily: "spec", fontSize: 18, marginTop: 10 }}>
+            <div style={{ fontFamily: "oxy", fontSize: 18, marginTop: 10 }}>
               {item.date}
             </div>
-            <div style={{ fontFamily: "spec", fontSize: 18, marginTop: 2 }}>
+            <div style={{ fontFamily: "oxy", fontSize: 18, marginTop: 2 }}>
               {item.owner}
             </div>
           </div>
         </div>
-        <div style={{ fontFamily: "spec-bold", fontSize: 24, marginTop: 10 }}>
+        <div style={{ fontFamily: "oxy-bold", fontSize: 24, marginTop: 10 }}>
           {"$" + item.price}
         </div>
       </div>

@@ -4,7 +4,6 @@ import tyler from "../images/tyler.png";
 import SSC from "../images/ssc.png";
 import bryan from "../images/bryan.jpeg";
 
-
 export default class Main extends Component {
   render() {
     return (
@@ -17,7 +16,7 @@ export default class Main extends Component {
       >
         <div
           style={{
-            fontFamily: "spec-bold",
+            fontFamily: "oxy-bold",
             fontSize: 36,
             marginTop: 40,
           }}
@@ -26,7 +25,7 @@ export default class Main extends Component {
         </div>
         <div
           style={{
-            fontFamily: "spec",
+            fontFamily: "oxy",
             width: 500,
             textAlign: "center",
             fontSize: 22,
@@ -97,7 +96,7 @@ export default class Main extends Component {
           <div
             style={{
               fontSize: 28,
-              fontFamily: "spec-bold",
+              fontFamily: "oxy-bold",
               color: secondaryColor,
             }}
           >
@@ -106,7 +105,7 @@ export default class Main extends Component {
           <div
             style={{
               fontSize: 20,
-              fontFamily: "spec-bold",
+              fontFamily: "oxy-bold",
               color: secondaryColor,
               marginTop: 0,
             }}
@@ -116,7 +115,7 @@ export default class Main extends Component {
           <div
             style={{
               fontSize: 20,
-              fontFamily: "spec-bold",
+              fontFamily: "oxy-bold",
               color: secondaryColor,
               marginTop: 15,
             }}

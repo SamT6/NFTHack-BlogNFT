@@ -21,7 +21,10 @@ export default class Header extends Component {
           position: "fixed",
           top: 0,
           backgroundImage:
-            "linear-gradient(0.45turn, #FFFFFF, #D1D5DB, #A4AAB8)",
+            "linear-gradient(0.25turn, #FFFFFF, #D1D5DB, #A4AAB8)",
+          borderStyle: "solid",
+          borderWidth: 1,
+          borderColor: "#d1d1d1",
           zIndex: 105,
         }}
       >
@@ -98,7 +101,7 @@ export default class Header extends Component {
           >
             <div
               style={{
-                fontFamily: "spec-bold",
+                fontFamily: "oxy-bold",
                 textAlign: "center",
                 fontSize: 18,
                 cursor: "pointer",
@@ -112,7 +115,7 @@ export default class Header extends Component {
           {!injected.isAuthorized() && (
             <div
               style={{
-                fontFamily: "spec-bold",
+                fontFamily: "oxy-bold",
                 textAlign: "center",
                 fontSize: 18,
                 marginLeft: isMobile ? "2vw" : "0vw",
@@ -143,7 +146,7 @@ export default class Header extends Component {
           >
             <div
               style={{
-                fontFamily: "spec-bold",
+                fontFamily: "oxy-bold",
                 textAlign: "center",
                 fontSize: 18,
                 cursor: "pointer",

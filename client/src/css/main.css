@@ -41,7 +41,21 @@
     url(../fonts/spec-bold-italic.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "oxy-bold";
+  src: local("oxy-bold"), url(../fonts/oxy-bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "oxy";
+  src: local("oxy"), url(../fonts/oxy.ttf) format("truetype");
+}
+
 .box-elem:hover {
   opacity: 0.8;
   transition-duration: 400ms;
+}
+
+body {
+  margin: 0px;
 }
