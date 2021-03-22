@@ -3,6 +3,10 @@ import MR from "../images/MR.png";
 import tyler from "../images/tyler.png";
 import SSC from "../images/ssc.png";
 import bryan from "../images/bryan.jpeg";
+import Typist from "react-typist";
+import "react-typist/dist/Typist.css";
+import TypistLoop from "react-typist-loop";
+import { Link } from "react-router-dom";
 
 export default class Main extends Component {
   render() {
@@ -16,16 +20,43 @@ export default class Main extends Component {
       >
         <div
           style={{
+            color: "#283142",
+            fontFamily: "test",
+            // fontWeight: "600",
+            marginTop: 100,
+            fontSize: 100,
+            textAlign: "flex-start",
+            height: 200,
+          }}
+        >
+          Collect NFT's from
+          <TypistLoop interval={0}>
+            {[
+              "Scholars",
+              "Bloggers",
+              "Writers",
+              "Thinkers",
+              "Intellectuals",
+            ].map((text) => (
+              <Typist key={text} avgTypingDelay={100} startDelay={0}>
+                {text}
+                <Typist.Backspace count={text.length} delay={2000} />
+              </Typist>
+            ))}
+          </TypistLoop>
+        </div>
+        {/* <div
+          style={{
             fontFamily: "oxy-bold",
-            fontSize: 36,
+            fontSize: 56,
             marginTop: 40,
           }}
         >
-          The only scholarly NFT's
-        </div>
-        <div
+          Collect NFT's From
+        </div> */}
+        {/* <div
           style={{
-            fontFamily: "oxy",
+            fontFamily: "test",
             width: 500,
             textAlign: "center",
             fontSize: 22,
@@ -35,29 +66,45 @@ export default class Main extends Component {
         >
           Scholars, academics, and writers release unique NFT's of their work
           that can only be found here.
+        </div> */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: 20,
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "oxy-bold",
+              backgroundColor: "#283142",
+              color: "white",
+              padding: 20,
+              borderRadius: 7,
+              cursor: "pointer",
+              fontSize: 15,
+            }}
+          >
+            START COLLECTING
+          </div>
+          <Link
+            to="info"
+            style={{
+              fontFamily: "oxy-bold",
+              borderRadius: 7,
+              marginTop: 20,
+              cursor: "pointer",
+              textDecorationColor: "#283142",
+              textDecorationThickness: 0,
+              textDecorationWidth: 0,
+              color: "#283142",
+              fontSize: 12,
+            }}
+          >
+            LEARN MORE
+          </Link>
         </div>
-        {/* {this.WriterBox(
-          "Tyler Cowen",
-          tyler,
-          "Marginal Revolution",
-          // "#16b78f",
-          this.blendColors("#16b78f", "#ffffff", 0.2),
-          this.blendColors("#242524", "#000000", 0.2),
-          23,
-          25,
-          "123"
-        )}*/}
-        {this.WriterBox(
-          "Andrew Young",
-          bryan,
-          "Scholaristic Divinations",
-          // "#003866",
-          this.blendColors("#16b78f", "#ffffff", 0.2),
-          this.blendColors("#000000", "#ffffff", 0.2),
-          0,
-          23,
-          "123"
-        )}
       </div>
     );
   }

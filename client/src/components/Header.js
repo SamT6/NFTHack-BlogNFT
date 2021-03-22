@@ -46,7 +46,7 @@ export default class Header extends Component {
           <div
             style={{
               marginLeft: 10,
-              fontSize: 46,
+              fontSize: 36,
               color: "#efbf00",
               color: "#283142",
               fontWeight: "500",
@@ -59,7 +59,7 @@ export default class Header extends Component {
           <div
             style={{
               marginLeft: 1,
-              fontSize: 46,
+              fontSize: 36,
               color: "#efbf00",
               color: "#283142",
               fontWeight: "500",
@@ -72,7 +72,7 @@ export default class Header extends Component {
           <div
             style={{
               marginLeft: 1,
-              fontSize: 46,
+              fontSize: 36,
               color: "#efbf00",
               color: "#283142",
               fontWeight: "500",
