@@ -32,11 +32,11 @@ export default class Main extends Component {
           Collect NFT's from
           <TypistLoop interval={0}>
             {[
-              "Scholars",
-              "Bloggers",
               "Writers",
+              "Bloggers",
               "Thinkers",
               "Intellectuals",
+              "Scholars",
             ].map((text) => (
               <Typist key={text} avgTypingDelay={100} startDelay={0}>
                 {text}
@@ -70,12 +70,14 @@ export default class Main extends Component {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            marginTop: 20,
+
+            flexDirection: "row",
+            marginTop: 30,
             alignItems: "center",
           }}
         >
-          <div
+          <Link
+            to="/sign-in"
             style={{
               fontFamily: "oxy-bold",
               backgroundColor: "#283142",
@@ -84,16 +86,24 @@ export default class Main extends Component {
               borderRadius: 7,
               cursor: "pointer",
               fontSize: 15,
+              width: 150,
+              textDecorationColor: "#283142",
+              textDecorationThickness: 0,
+              textDecorationWidth: 0,
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             START COLLECTING
-          </div>
+          </Link>
           <Link
             to="info"
             style={{
               fontFamily: "oxy-bold",
               borderRadius: 7,
-              marginTop: 20,
+              marginLeft: 20,
               cursor: "pointer",
               textDecorationColor: "#283142",
               textDecorationThickness: 0,

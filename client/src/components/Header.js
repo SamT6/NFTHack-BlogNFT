@@ -35,7 +35,7 @@ export default class Header extends Component {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: isMobile ? "5vw" : "15vw",
+            marginLeft: isMobile ? "5vw" : "5vw",
             textDecorationColor: "#ffd700",
             textDecorationThickness: 0,
             textDecorationWidth: 0,
@@ -112,6 +112,34 @@ export default class Header extends Component {
             </div>
           </Link>
 
+          <Link
+            to="/sell"
+            id="header-link"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: isMobile ? "2vw" : "0vw",
+              textDecorationColor: "#283142",
+              textDecorationThickness: 0,
+              textDecorationWidth: 0,
+              textDecoration: "none",
+              marginRight: 25,
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "oxy-bold",
+                textAlign: "center",
+                fontSize: 18,
+                cursor: "pointer",
+                color: "#283142",
+              }}
+            >
+              Discover
+            </div>
+          </Link>
+
           {!injected.isAuthorized() && (
             <div
               style={{
@@ -130,6 +158,34 @@ export default class Header extends Component {
           )}
 
           <Link
+            to="/sign-in"
+            id="header-link"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: isMobile ? "2vw" : "0vw",
+              textDecorationColor: "#283142",
+              textDecorationThickness: 0,
+              textDecorationWidth: 0,
+              textDecoration: "none",
+              marginRight: 25,
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "oxy-bold",
+                textAlign: "center",
+                fontSize: 18,
+                cursor: "pointer",
+                color: "#283142",
+              }}
+            >
+              Sign in
+            </div>
+          </Link>
+
+          <Link
             to="/contact"
             id="header-link"
             style={{
@@ -141,7 +197,7 @@ export default class Header extends Component {
               textDecorationThickness: 0,
               textDecorationWidth: 0,
               textDecoration: "none",
-              marginRight: "15vw",
+              marginRight: "5vw",
             }}
           >
             <div

@@ -16,6 +16,7 @@ import {
   IfFirebaseAuthed,
   IfFirebaseAuthedAnd,
 } from "@react-firebase/auth";
+import SignInUser from "../screens/SignInUser";
 
 export default class RenderRoutes extends Component {
   render() {
@@ -45,6 +46,11 @@ export default class RenderRoutes extends Component {
             <Switch>
               // Andrew
               <Route path="/" exact={true} render={() => <Main />} />
+              <Route
+                path="/sign-in"
+                exact={true}
+                render={() => <SignInUser />}
+              />
               <Route path="/sell" exact={true} render={() => <Sell />} />
               <Route path="/creator" exact={false} render={() => <Creator />} />
               <Route path="/shards" exact={false} render={() => <Shard />} />
