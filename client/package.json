@@ -9,6 +9,7 @@
     "@web3-react/fortmatic-connector": "^6.1.6",
     "@web3-react/injected-connector": "^6.0.7",
     "axios": "^0.21.1",
+    "coinbase": "^2.0.8",
     "firebase": "^8.3.1",
     "form-data": "^4.0.0",
     "nft.storage": "^0.3.8",

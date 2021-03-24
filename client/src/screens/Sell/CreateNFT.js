@@ -43,8 +43,8 @@ export default function MintNFT() {
   const [title, setTitle] = useState("");
 
   const [sellPrice, setSellPrice] = useState(0);
+  const [duration, setDuration] = useState(0);
 
-  const [nftOwnByEthAccount, setNFTOwnByEthAccount] = useState({});
 
   const connect_metamask = async () => {
     const accounts = await window.ethereum.enable();
@@ -64,34 +64,36 @@ export default function MintNFT() {
         from: ethAccount,
       });
 
+    const latestNFTIndex = await blogNFTContract.methods.balanceOf(ethAccount).call();
+    const tokenID = await blogNFTContract.methods
+        .tokenOfOwnerByIndex(ethAccount, latestNFTIndex-1)
+        .call();
+    console.log("latest token id: ", tokenID);
+    
+    //give permission to move token to contract
+    await blogNFTContract.methods
+      .approve(auction_address, tokenID)
+      .send({
+        from: ethAccount,
+      });
+    console.log("permission given");
+    
+    //call opentrade on marketplace.sol
+    await auctionContract.methods
+      .createAuction(tokenID, web3.utils.toWei(sellPrice, 'ether'), duration) // add duration and convert sellprice to wei
+      .send({
+        from: ethAccount,
+      });
+      console.log("nft on auction");
+
     const name = firebase.auth().currentUser.displayName;
     firebase
       .firestore()
       .collection("sellers")
       .doc(name)
       .update({ NFTs: firebase.firestore.FieldValue.arrayUnion(cid) });
-    
-
-    const latestNFTIndex = await blogNFTContract.methods.balanceOf(ethAccount).call();
-    const tokenID = await blogNFTContract.methods
-        .tokenOfOwnerByIndex(ethAccount, latestNFTIndex)
-        .call();
-
-    
-    //give permission to move token to contract
-    await blogNFTContract.methods
-      .approve(marketplace_address, tokenID)
-      .send({
-        from: ethAccount,
-      });
-
-    //call opentrade on marketplace.sol
-    await auctionContract.methods
-      .createAuction(tokenID, sellPrice, 0) // add duration and convert sellprice to wei
-      .send({
-        from: ethAccount,
-      });
   };
+
 
 
   return (
@@ -138,12 +140,22 @@ export default function MintNFT() {
           />
           <br />
 
-          <label for="price">Price:</label>
+          <label for="price">Price (ETH):</label>
           <input
             type="text"
             id="price"
             onChange={(t) => {
               setSellPrice(t.target.value);
+            }}
+          />
+          <br />
+
+          <label for="time">Length of auction (in days):</label>
+          <input
+            type="text"
+            id="time"
+            onChange={(t) => {
+              setDuration(t.target.value * 24 * 60 * 60); // convert day to seconds
             }}
           />
           <br />
@@ -157,20 +169,11 @@ export default function MintNFT() {
             }}
           /> */}
           <br />
-          {/* <button className="button">submit</button>
+            <button className="button">submit</button>
         </form>
       </div>
 
-      <div className="card">
-        <form className="form" >
-          <h3>Sell Blog NFT</h3>
-          <button >see your blogs</button>          
-          <br /> */}
-
-          
-
-        </form>
-      </div>
+      
       {/* <div className="card">
         <br />
         <button onClick={get_nft}>See Your NFT</button>
