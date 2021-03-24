@@ -54,7 +54,7 @@ export default function MintNFT() {
   const mintNFT = async (t) => {
     t.preventDefault();
         
-    const content = new Blob([author, title, url, Date.now(), ]);
+    const content = new Blob([author, title, url, Date.now(), d]);
     const cid = await client.storeBlob(content);
     console.log(cid);
 
