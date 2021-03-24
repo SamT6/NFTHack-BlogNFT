@@ -21,15 +21,75 @@ export default function Sell() {
   );
 }
 
+
+
 function SellerPage() {
   function signOut() {
     firebase.auth().signOut();
   }
+
+  const get_nft = async (t) => {
+    t.preventDefault();
+    console.log("getting nft");
+
+    const numOfNFT = await blogNFTContract.methods.balanceOf(ethAccount).call();
+    console.log("number of nft: ", numOfNFT);
+
+    let nfts = {};
+    for (var i = 0; i < parseInt(numOfNFT); i++) {
+      const tokenID = await blogNFTContract.methods
+        .tokenOfOwnerByIndex(ethAccount, i)
+        .call();
+      console.log(tokenID);
+      //get blog title with tokenID
+      const tokenURI = await blogNFTContract.methods.tokenURI(tokenID).call(); // metadata, IPFS link
+      console.log("tokenURI: ", tokenURI.slice(7, tokenURI.length));
+      axios
+        .get("https://nft.storage/api/" + tokenURI.slice(7, tokenURI.length))
+        .then(function (response) {
+          console.log(response);
+        });
+
+      //add {tokenid, blog title} to nfts
+      //nfts[tokenID] = blogTitle;
+      //setState of nftOwnByEthAccount
+      setNFTOwnByEthAccount(nfts);
+    }
+  };const get_nft = async (t) => {
+    t.preventDefault();
+    console.log("getting nft");
+
+    const numOfNFT = await blogNFTContract.methods.balanceOf(ethAccount).call();
+    console.log("number of nft: ", numOfNFT);
+
+    let nfts = {};
+    for (var i = 0; i < parseInt(numOfNFT); i++) {
+      const tokenID = await blogNFTContract.methods
+        .tokenOfOwnerByIndex(ethAccount, i)
+        .call();
+      console.log(tokenID);
+      //get blog title with tokenID
+      const tokenURI = await blogNFTContract.methods.tokenURI(tokenID).call(); // metadata, IPFS link
+      console.log("tokenURI: ", tokenURI.slice(7, tokenURI.length));
+      axios
+        .get("https://nft.storage/api/" + tokenURI.slice(7, tokenURI.length))
+        .then(function (response) {
+          console.log(response);
+        });
+
+      //add {tokenid, blog title} to nfts
+      //nfts[tokenID] = blogTitle;
+      //setState of nftOwnByEthAccount
+      //setNFTOwnByEthAccount(nfts);
+    }
+  };
+
   if (firebase.auth().currentUser.emailVerified) {
     return (
       <div>
         <button onClick={signOut}>Sign Out</button>
         <br />
+        {/* TO DO */}
         <button>View my NFTS</button>
 
         <CreateNFT />
@@ -46,4 +106,8 @@ function SellerPage() {
       </div>
     );
   }
+}
+
+function viewNFTs() {
+  
 }

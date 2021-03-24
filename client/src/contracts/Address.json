@@ -94,7 +94,6 @@
                     }
                   ],
                   "id": 1980,
-                  "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
                   "src": "989:12:12"
                 },
